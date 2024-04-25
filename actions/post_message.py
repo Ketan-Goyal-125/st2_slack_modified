@@ -26,7 +26,7 @@ class PostMessageAction(Action):
                              'post_message_action.webhook_url config option"')
 
         headers = {}
-        headers['Content-Type'] = 'application/x-www-form-urlencoded'
+        headers['Content-Type'] = 'application/json'
         body = {
             'username': username,
             'text': message
@@ -47,8 +47,8 @@ class PostMessageAction(Action):
         if webhook_url:
             body['webhook_url'] = webhook_url
 
-        data = {'payload': json.dumps(body)}
-        data = urlencode(data)
+        data = {'payload': body}
+        # data = urlencode(data)
         response = requests.post(url=webhook_url,
                                  headers=headers, data=data)
 
