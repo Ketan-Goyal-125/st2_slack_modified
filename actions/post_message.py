@@ -47,7 +47,7 @@ class PostMessageAction(Action):
         if webhook_url:
             body['webhook_url'] = webhook_url
 
-        data = {'payload': body}
+        data = json.dumps(body)
         # data = urlencode(data)
         response = requests.post(url=webhook_url,
                                  headers=headers, data=data)
